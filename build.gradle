@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.tourguide-location-service'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '15'
+sourceCompatibility = '14'
 
 repositories {
 	mavenCentral()
@@ -20,9 +20,11 @@ ext {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compile group: 'com.googlecode.jmapper-framework', name: 'jmapper-core', version: '1.6.1.CR2'
+	compile files('libs/gpsUtil.jar')
+	
 }
 
 dependencyManagement {
