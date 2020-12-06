@@ -1,6 +1,6 @@
-package com.tourguidelocationservice.model;
+package com.tourguidelocationservice.bean;
 
-public class AttractionDto {
+public class AttractionBean {
 	
 	private String attractionName;
 	private String attractionCity;
@@ -8,7 +8,7 @@ public class AttractionDto {
 	private  double latitude;
 	private double longitude;
 	
-	public AttractionDto() {
+	public AttractionBean() {
 	}
 
 	public String getAttractionName() {
@@ -74,7 +74,7 @@ public class AttractionDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AttractionDto other = (AttractionDto) obj;
+		AttractionBean other = (AttractionBean) obj;
 		if (attractionCity == null) {
 			if (other.attractionCity != null)
 				return false;
@@ -99,7 +99,7 @@ public class AttractionDto {
 
 	@Override
 	public String toString() {
-		return "AttractionDto [attractionName=" + attractionName + ", attractionCity=" + attractionCity
+		return "AttractionBean [attractionName=" + attractionName + ", attractionCity=" + attractionCity
 				+ ", attractionState=" + attractionState + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
 	

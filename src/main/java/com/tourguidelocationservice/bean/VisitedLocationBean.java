@@ -1,4 +1,4 @@
-package com.tourguidelocationservice.model;
+package com.tourguidelocationservice.bean;
 
 import java.util.Date;
 import java.util.UUID;
@@ -7,13 +7,13 @@ import gpsUtil.location.Location;
 
 
 
-public class VisitedLocationDto {
+public class VisitedLocationBean {
 
 	private UUID userId;
 	private Location location;
 	private Date timeVisited;
 	
-	public VisitedLocationDto() {
+	public VisitedLocationBean() {
 	}
 
 	public UUID getUserId() {

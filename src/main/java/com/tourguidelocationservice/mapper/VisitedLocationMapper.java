@@ -2,19 +2,19 @@ package com.tourguidelocationservice.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.tourguidelocationservice.model.VisitedLocationDto;
+import com.tourguidelocationservice.bean.VisitedLocationBean;
 
 import gpsUtil.location.VisitedLocation;
 
 @Component
 public class VisitedLocationMapper {
 	
-	public VisitedLocationDto mapVisitedLocation(VisitedLocation visitedLocation) {
-		VisitedLocationDto visitedLocationDto = new VisitedLocationDto();
-		visitedLocationDto.setUserId(visitedLocation.userId);
-		visitedLocationDto.setLocation(visitedLocation.location);
-		visitedLocationDto.setTimeVisited(visitedLocation.timeVisited);
-		return visitedLocationDto; 
+	public VisitedLocationBean mapVisitedLocation(VisitedLocation visitedLocation) {
+		VisitedLocationBean visitedLocationBean = new VisitedLocationBean();
+		visitedLocationBean.setUserId(visitedLocation.userId);
+		visitedLocationBean.setLocation(visitedLocation.location);
+		visitedLocationBean.setTimeVisited(visitedLocation.timeVisited);
+		return visitedLocationBean; 
 	}
 
 }

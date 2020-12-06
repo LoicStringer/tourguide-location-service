@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tourguidelocationservice.model.AttractionDto;
+import com.tourguidelocationservice.bean.AttractionBean;
 import com.tourguidelocationservice.service.AttractionLocationService;
 
 @RestController
@@ -17,7 +17,7 @@ public class AttractionLocationController {
 	private AttractionLocationService attractionLocationService;
 	
 	@GetMapping(value = "/attractions")
-	public ResponseEntity<List<AttractionDto>> getAttractions(){
+	public ResponseEntity<List<AttractionBean>> getAttractions(){
 		return ResponseEntity.ok(attractionLocationService.getAttractions());
 	}
 	

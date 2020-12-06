@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tourguidelocationservice.model.VisitedLocationDto;
+import com.tourguidelocationservice.bean.VisitedLocationBean;
 import com.tourguidelocationservice.service.VisitedLocationService;
 
 
@@ -20,7 +20,7 @@ public class VisitedLocationController {
 	private VisitedLocationService visitedLocationService;
 
 	@GetMapping(value = "/users/user/{id}/location")
-	public ResponseEntity<VisitedLocationDto> getUserLocation(@PathVariable UUID id){
+	public ResponseEntity<VisitedLocationBean> getUserLocation(@PathVariable UUID id){
 		return ResponseEntity.ok(visitedLocationService.getUserLocation(id));
 	}
 }

@@ -2,21 +2,21 @@ package com.tourguidelocationservice.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.tourguidelocationservice.model.AttractionDto;
+import com.tourguidelocationservice.bean.AttractionBean;
 
 import gpsUtil.location.Attraction;
 
 @Component
 public class AttractionMapper  {
 	
-	public AttractionDto mapAttraction(Attraction attraction) {
-		AttractionDto attractionDto = new AttractionDto();
-		attractionDto.setAttractionName(attraction.attractionName);
-		attractionDto.setAttractionCity(attraction.city);
-		attractionDto.setAttractionState(attraction.state);
-		attractionDto.setLatitude(attraction.latitude);
-		attractionDto.setLongitude(attraction.longitude);
-		return attractionDto;
+	public AttractionBean mapAttraction(Attraction attraction) {
+		AttractionBean attractionBean = new AttractionBean();
+		attractionBean.setAttractionName(attraction.attractionName);
+		attractionBean.setAttractionCity(attraction.city);
+		attractionBean.setAttractionState(attraction.state);
+		attractionBean.setLatitude(attraction.latitude);
+		attractionBean.setLongitude(attraction.longitude);
+		return attractionBean;
 	}
 	
 	
