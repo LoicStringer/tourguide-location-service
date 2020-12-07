@@ -6,25 +6,18 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tourguidelocationservice.bean.AttractionBean;
-import com.tourguidelocationservice.mapper.AttractionMapper;
 import com.tourguidelocationservice.proxy.GpsUtilProxy;
+
+import gpsUtil.location.Attraction;
 
 @Service
 public class AttractionLocationService {
 	
 	@Autowired
-	private AttractionMapper attractionMapper;
-	
-	@Autowired
 	private GpsUtilProxy gpsUtilProxy;
 	
-	public List<AttractionBean> getAttractions(){
-		List<AttractionBean> attractionBeansList = gpsUtilProxy.getAttractions()
-				.stream()
-				.map(at-> attractionMapper.mapAttraction(at))
-				.collect(Collectors.toList());
-		return attractionBeansList;
+	public List<Attraction> getAttractions(){
+		 return gpsUtilProxy.getAttractions();
 	}
 
 }
