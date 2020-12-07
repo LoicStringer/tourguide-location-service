@@ -12,15 +12,13 @@ import com.tourguidelocationservice.service.VisitedLocationService;
 
 import gpsUtil.location.VisitedLocation;
 
-
-
 @RestController
 public class VisitedLocationController {
 	
 	@Autowired
 	private VisitedLocationService visitedLocationService;
 
-	@GetMapping(value = "/users/user/{id}/location")
+	@GetMapping("/location")
 	public ResponseEntity<VisitedLocation> getUserLocation(@PathVariable UUID id){
 		return ResponseEntity.ok(visitedLocationService.getUserLocation(id));
 	}
