@@ -13,7 +13,6 @@ public class VisitedLocationBean {
 	}
 
 	public VisitedLocationBean(UUID userId, LocationBean location, Date timeVisited) {
-		super();
 		this.userId = userId;
 		this.location = location;
 		this.timeVisited = timeVisited;
