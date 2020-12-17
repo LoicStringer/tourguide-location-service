@@ -17,8 +17,8 @@ public class VisitedLocationController {
 	@Autowired
 	private VisitedLocationService visitedLocationService;
 
-	@GetMapping("{id}/location")
-	public ResponseEntity<VisitedLocationBean> getUserLocation(@PathVariable UUID id){
-		return ResponseEntity.ok(visitedLocationService.getUserLocation(id));
+	@GetMapping("/users/{userId}/visited-locations/latest")
+	public ResponseEntity<VisitedLocationBean> getUserLocation(@PathVariable UUID userId){
+		return ResponseEntity.ok(visitedLocationService.getUserLocation(userId));
 	}
 }
