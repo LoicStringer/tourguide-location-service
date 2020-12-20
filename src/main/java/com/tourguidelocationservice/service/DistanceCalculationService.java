@@ -2,19 +2,19 @@ package com.tourguidelocationservice.service;
 
 import org.springframework.stereotype.Service;
 
-import gpsUtil.location.Location;
+import com.tourguidelocationservice.bean.LocationBean;
 
 @Service
 public class DistanceCalculationService {
 
 	private static final double MEAN_EARTH_RADIUS_MILES_VALUE = 3958.7613;
 	
-	public double getDistance(Location loc1, Location loc2) {
+	public double getDistance(LocationBean loc1, LocationBean loc2) {
 		
-		double lat1 = loc1.latitude;
-		double lon1 = loc1.longitude;
-		double lat2 = loc2.latitude;
-		double lon2 = loc2.longitude;
+		double lat1 = loc1.getLatitude();
+		double lon1 = loc1.getLongitude();
+		double lat2 = loc2.getLatitude();
+		double lon2 = loc2.getLongitude();
 
 		double latDistance = Math.toRadians(lat2 - lat1);
 		double lonDistance = Math.toRadians(lon1 - lon2);

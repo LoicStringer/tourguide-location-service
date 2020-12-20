@@ -11,7 +11,7 @@ import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 
 @Service
-public class GpsUtilProxy implements IGpsUtilProxy{
+public class GpsUtilProxyImpl implements IGpsUtilProxy{
 	
 	@Autowired
 	private GpsUtil gpsUtil;
