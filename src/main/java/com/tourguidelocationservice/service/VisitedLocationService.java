@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tourguidelocationservice.bean.LocationBean;
 import com.tourguidelocationservice.bean.VisitedLocationBean;
 import com.tourguidelocationservice.mapper.VisitedLocationMapper;
 import com.tourguidelocationservice.proxy.GpsUtilProxyImpl;
@@ -23,11 +22,13 @@ public class VisitedLocationService {
 	@Autowired
 	private VisitedLocationMapper visitedLocationMapper;
 	
-	public LocationBean getUserLocation (UUID userId) {
+	public VisitedLocationBean getUserLocation (UUID userId) {
 		VisitedLocationBean visitedLocation = userProxy.getUserLatestVisitedLocation(userId);
-		if (visitedLocation == null)
+		if (visitedLocation == null) {
 			visitedLocation = visitedLocationMapper.mapVisitedLocation(gpsUtilProxyImpl.getUserLocation(userId));
-		return visitedLocation.getLocation();
+			userProxy.addUserVisitedLocation(userId, visitedLocation);
+		}
+		return visitedLocation;
 	}
 
 }
