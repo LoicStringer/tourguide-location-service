@@ -1,5 +1,6 @@
 package com.tourguidelocationservice.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -25,15 +26,15 @@ public class AttractionLocationService {
 	private DistanceCalculationService distanceCalculationService;
 
 	public TreeMap<Double, AttractionBean> getDistancesToAttractions(LocationBean location) {
-		TreeMap<Double, AttractionBean> disatncesToAttractionsMap = new TreeMap<Double, AttractionBean>();
+		TreeMap<Double, AttractionBean> distancesToAttractionsMap = new TreeMap<Double, AttractionBean>();
 		List<AttractionBean> attractionsList = getAttractions();
 		attractionsList.forEach(at -> {
 			LocationBean attractionLocation = new LocationBean(at.latitude, at.longitude);
 			double distance = 
 					distanceCalculationService.getDistance(location,attractionLocation);
-			disatncesToAttractionsMap.put(distance, at);
+			distancesToAttractionsMap.put(distance, at);
 		});
-		return disatncesToAttractionsMap;
+		return distancesToAttractionsMap;
 	}
 
 	private List<AttractionBean> getAttractions() {

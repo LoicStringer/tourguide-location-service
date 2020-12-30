@@ -17,5 +17,5 @@ public interface UserProxy {
 	VisitedLocationBean getUserLatestVisitedLocation(@PathVariable("userId")UUID userId);
 	
 	@PostMapping("/users/{userId}/visited-locations")
-	void addUserVisitedLocation(@PathVariable ("userId")UUID userId, @RequestBody VisitedLocationBean visitedLocation);
+	VisitedLocationBean addUserVisitedLocation(@PathVariable ("userId")UUID userId, @RequestBody VisitedLocationBean visitedLocation);
 }

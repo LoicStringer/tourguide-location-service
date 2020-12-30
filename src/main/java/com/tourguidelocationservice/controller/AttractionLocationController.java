@@ -23,5 +23,4 @@ public class AttractionLocationController {
 		return ResponseEntity.ok(attractionLocationService.getDistancesToAttractions(location));
 	}
 	
-	
 }
