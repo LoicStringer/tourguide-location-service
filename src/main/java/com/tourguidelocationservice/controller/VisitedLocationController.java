@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tourguidelocationservice.bean.VisitedLocationBean;
 import com.tourguidelocationservice.service.VisitedLocationService;
+import com.tourguidelocationservice.validation.ValidUUID;
 
 @RestController
 public class VisitedLocationController {
@@ -18,7 +19,7 @@ public class VisitedLocationController {
 	private VisitedLocationService visitedLocationService;
 
 	@GetMapping("/users/{userId}/visited-locations/latest")
-	public ResponseEntity<VisitedLocationBean> getUserLocation(@PathVariable UUID userId){
+	public ResponseEntity<VisitedLocationBean> getUserLocation(@PathVariable @ValidUUID UUID userId){
 		return ResponseEntity.ok(visitedLocationService.getUserLocation(userId));
 	}
 }

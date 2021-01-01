@@ -2,6 +2,8 @@ package com.tourguidelocationservice.controller;
 
 import java.util.TreeMap;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +21,7 @@ public class AttractionLocationController {
 	private AttractionLocationService attractionLocationService;
 	
 	@PostMapping("/attractions/distances")
-	public ResponseEntity<TreeMap<Double,AttractionBean>> getDistancesToAttractionsMap (@RequestBody LocationBean location){
+	public ResponseEntity<TreeMap<Double,AttractionBean>> getDistancesToAttractionsMap (@RequestBody @Valid LocationBean location){
 		return ResponseEntity.ok(attractionLocationService.getDistancesToAttractions(location));
 	}
 	

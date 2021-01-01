@@ -1,8 +1,16 @@
 package com.tourguidelocationservice.bean;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class LocationBean {
 
+	@Min(value = -90)
+	@Max(value = 90)
 	private double longitude;
+	
+	@Min(value = -180)
+	@Max(value = 180)
 	private double latitude;
 	
 	public LocationBean() {

@@ -1,6 +1,5 @@
 package com.tourguidelocationservice.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -38,7 +37,7 @@ public class AttractionLocationService {
 	}
 
 	private List<AttractionBean> getAttractions() {
-		return gpsUtilProxyImpl.getAttractions().stream().map(at -> attractionMapper.mapAttraction(at))
+		return gpsUtilProxyImpl.getAttractions().parallelStream().map(at -> attractionMapper.mapAttraction(at))
 				.collect(Collectors.toList());
 	}
 
