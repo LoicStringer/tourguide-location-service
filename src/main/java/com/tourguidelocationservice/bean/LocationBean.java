@@ -5,13 +5,13 @@ import javax.validation.constraints.Min;
 
 public class LocationBean {
 
-	@Min(value = -90)
-	@Max(value = 90)
-	private double longitude;
-	
 	@Min(value = -180)
-	@Max(value = 180)
-	private double latitude;
+   	@Max(value = 180)
+    public double longitude;
+    
+    @Min(value = -90)
+   	@Max(value = 90)
+    public double latitude;
 	
 	public LocationBean() {
 	}

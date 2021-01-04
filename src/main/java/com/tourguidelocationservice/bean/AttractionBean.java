@@ -2,13 +2,22 @@ package com.tourguidelocationservice.bean;
 
 import java.util.UUID;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class AttractionBean {
 	
 	public UUID attractionId;
 	public String attractionName;
     public String city;
     public String state;
+    
+    @Min(value = -180)
+   	@Max(value = 180)
     public double longitude;
+    
+    @Min(value = -90)
+   	@Max(value = 90)
     public double latitude;
     
 	public AttractionBean() {

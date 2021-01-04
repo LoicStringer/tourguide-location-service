@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tourguidelocationservice.bean.VisitedLocationBean;
+import com.tourguidelocationservice.exception.GpsUtilException;
 import com.tourguidelocationservice.mapper.VisitedLocationMapper;
 import com.tourguidelocationservice.proxy.GpsUtilProxyImpl;
 import com.tourguidelocationservice.proxy.UserProxy;
@@ -22,7 +23,7 @@ public class VisitedLocationService {
 	@Autowired
 	private VisitedLocationMapper visitedLocationMapper;
 	
-	public VisitedLocationBean getUserLocation (UUID userId) {
+	public VisitedLocationBean getUserLocation (UUID userId) throws GpsUtilException {
 		VisitedLocationBean visitedLocation = userProxy.getUserLatestVisitedLocation(userId);
 		if (visitedLocation == null) {
 			visitedLocation = visitedLocationMapper.mapVisitedLocation(gpsUtilProxyImpl.getUserLocation(userId));

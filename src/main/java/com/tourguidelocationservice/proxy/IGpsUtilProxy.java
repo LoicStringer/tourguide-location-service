@@ -8,6 +8,6 @@ import gpsUtil.location.VisitedLocation;
 
 public interface IGpsUtilProxy {
 	
-	VisitedLocation getUserLocation (UUID userId);
-	List<Attraction> getAttractions();
+	VisitedLocation getUserLocation (UUID userId) throws Exception;
+	List<Attraction> getAttractions() throws Exception;
 }

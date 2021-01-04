@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tourguidelocationservice.bean.AttractionBean;
 import com.tourguidelocationservice.bean.LocationBean;
+import com.tourguidelocationservice.exception.GpsUtilException;
 import com.tourguidelocationservice.mapper.AttractionMapper;
 import com.tourguidelocationservice.proxy.GpsUtilProxyImpl;
 
@@ -24,19 +25,22 @@ public class AttractionLocationService {
 	@Autowired
 	private DistanceCalculationService distanceCalculationService;
 
-	public TreeMap<Double, AttractionBean> getDistancesToAttractions(LocationBean location) {
+	public TreeMap<Double, AttractionBean> getDistancesToAttractions(LocationBean location) throws GpsUtilException 
+	{
 		TreeMap<Double, AttractionBean> distancesToAttractionsMap = new TreeMap<Double, AttractionBean>();
-		List<AttractionBean> attractionsList = getAttractions();
+		List<AttractionBean> attractionsList = getAttractionsList();
+	
 		attractionsList.forEach(at -> {
 			LocationBean attractionLocation = new LocationBean(at.latitude, at.longitude);
 			double distance = 
 					distanceCalculationService.getDistance(location,attractionLocation);
 			distancesToAttractionsMap.put(distance, at);
 		});
+		
 		return distancesToAttractionsMap;
 	}
 
-	private List<AttractionBean> getAttractions() {
+	private List<AttractionBean> getAttractionsList() throws GpsUtilException {
 		return gpsUtilProxyImpl.getAttractions().parallelStream().map(at -> attractionMapper.mapAttraction(at))
 				.collect(Collectors.toList());
 	}

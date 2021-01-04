@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tourguidelocationservice.bean.AttractionBean;
 import com.tourguidelocationservice.bean.LocationBean;
+import com.tourguidelocationservice.exception.GpsUtilException;
 import com.tourguidelocationservice.service.AttractionLocationService;
 
 @RestController
@@ -21,7 +22,7 @@ public class AttractionLocationController {
 	private AttractionLocationService attractionLocationService;
 	
 	@PostMapping("/attractions/distances")
-	public ResponseEntity<TreeMap<Double,AttractionBean>> getDistancesToAttractionsMap (@RequestBody @Valid LocationBean location){
+	public ResponseEntity<TreeMap<Double,AttractionBean>> getDistancesToAttractionsMap (@RequestBody @Valid LocationBean location) throws GpsUtilException{
 		return ResponseEntity.ok(attractionLocationService.getDistancesToAttractions(location));
 	}
 	
