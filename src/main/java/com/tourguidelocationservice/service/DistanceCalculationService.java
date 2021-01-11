@@ -10,7 +10,7 @@ public class DistanceCalculationService {
 	private static final double MEAN_EARTH_RADIUS_MILES_VALUE = 3958.7613;
 	
 	public double getDistance(LocationBean loc1, LocationBean loc2) {
-		
+
 		double lat1 = loc1.getLatitude();
 		double lon1 = loc1.getLongitude();
 		double lat2 = loc2.getLatitude();
@@ -27,5 +27,18 @@ public class DistanceCalculationService {
 		return distance;
 	}
 	
+	public boolean checkIfLocationIsValid(LocationBean location) {
+		if(checkIfLatitudeIsValid(location.getLatitude())==false
+				||checkIfLongitudeIsValid(location.getLongitude())==false)
+			return false;
+		return true;
+	}
 	
+	private boolean checkIfLatitudeIsValid(double latitude) {
+		return latitude >= -90.00 && latitude <= 90.00 ;
+	}
+	
+	private boolean checkIfLongitudeIsValid(double longitude) {
+		return longitude >= -180.00 && longitude <= 180.00 ;
+	}
 }

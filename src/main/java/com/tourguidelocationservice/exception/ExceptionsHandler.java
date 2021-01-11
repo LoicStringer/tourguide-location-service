@@ -14,11 +14,24 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ExceptionsHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(GpsUtilException.class)
-	public ResponseEntity<ExceptionResponse> handleGpsUtilException(GpsUtilException gpqUtilexception) {
-		ExceptionResponse exceptionResponse = buildExceptionResponse(gpqUtilexception);
-		return new ResponseEntity<ExceptionResponse>(exceptionResponse, getHttpStatusFromException(gpqUtilexception));
+	public ResponseEntity<ExceptionResponse> handleGpsUtilException(GpsUtilException gpsUtilException) {
+		ExceptionResponse exceptionResponse = buildExceptionResponse(gpsUtilException);
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, getHttpStatusFromException(gpsUtilException));
 	}
 
+	@ExceptionHandler(InvalidLocationException.class)
+	public ResponseEntity<ExceptionResponse> handleGpsUtilException(InvalidLocationException invalidLocationException) {
+		ExceptionResponse exceptionResponse = buildExceptionResponse(invalidLocationException);
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, getHttpStatusFromException(invalidLocationException));
+	}
+
+	@ExceptionHandler(UserServiceException.class)
+	public ResponseEntity<ExceptionResponse> handleGpsUtilException(UserServiceException userServiceException) {
+		ExceptionResponse exceptionResponse = buildExceptionResponse(userServiceException);
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, getHttpStatusFromException(userServiceException));
+	}
+
+	
 	private ExceptionResponse buildExceptionResponse(Exception ex) {
 		String statusCode = getStatusCodeFromException(ex);
 		ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDateTime.now(), statusCode,

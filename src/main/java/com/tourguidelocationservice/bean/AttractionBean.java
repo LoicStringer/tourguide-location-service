@@ -2,36 +2,27 @@ package com.tourguidelocationservice.bean;
 
 import java.util.UUID;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
 public class AttractionBean {
 	
 	public UUID attractionId;
 	public String attractionName;
     public String city;
     public String state;
-    
-    @Min(value = -180)
-   	@Max(value = 180)
-    public double longitude;
-    
-    @Min(value = -90)
-   	@Max(value = 90)
     public double latitude;
+    public double longitude;
     
 	public AttractionBean() {
 	}
 
-	public AttractionBean(UUID attractionId, String attractionName, String city, String state, double longitude,
-			double latitude) {
+	public AttractionBean(UUID attractionId, String attractionName, String city, String state, double latitude,
+			double longitude) {
 		super();
 		this.attractionId = attractionId;
 		this.attractionName = attractionName;
 		this.city = city;
 		this.state = state;
-		this.longitude = longitude;
 		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	public UUID getAttractionId() {
@@ -66,14 +57,6 @@ public class AttractionBean {
 		this.state = state;
 	}
 
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
 	public double getLatitude() {
 		return latitude;
 	}
@@ -82,6 +65,13 @@ public class AttractionBean {
 		this.latitude = latitude;
 	}
 
-	
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
     
 }

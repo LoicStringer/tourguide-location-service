@@ -3,11 +3,11 @@ package com.tourguidelocationservice.proxy;
 import java.util.List;
 import java.util.UUID;
 
-import gpsUtil.location.Attraction;
-import gpsUtil.location.VisitedLocation;
+import com.tourguidelocationservice.bean.AttractionBean;
+import com.tourguidelocationservice.bean.VisitedLocationBean;
 
 public interface IGpsUtilProxy {
 	
-	VisitedLocation getUserLocation (UUID userId) throws Exception;
-	List<Attraction> getAttractions() throws Exception;
+	VisitedLocationBean getUserLocation (UUID userId) throws Exception;
+	List<AttractionBean> getAttractions() throws Exception;
 }
