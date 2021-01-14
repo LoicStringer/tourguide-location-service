@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +22,8 @@ import com.tourguidelocationservice.exception.UserServiceException;
 import com.tourguidelocationservice.proxy.GpsUtilProxyImpl;
 import com.tourguidelocationservice.proxy.UserProxy;
 
+import feign.FeignException;
+
 @ExtendWith(MockitoExtension.class)
 class VisitedLocationServiceTest {
 
@@ -35,39 +36,37 @@ class VisitedLocationServiceTest {
 	@InjectMocks
 	private VisitedLocationService visitedLocationService;
 	
-	private static VisitedLocationBean userLastVisitedLocation ;
+	private static VisitedLocationBean userLocation ;
 	private VisitedLocationBean userActualLocation;
 	
 	@BeforeAll
 	static void setUp() {
-		userLastVisitedLocation = new VisitedLocationBean(UUID.randomUUID(),new LocationBean(20.50,20.50),new Date());
+		userLocation = new VisitedLocationBean(UUID.randomUUID(),new LocationBean(20.50,20.50),new Date());
 	}
 	
 	@Test
 	void getUserLocationTestWhenLastAndActualAreEqual() throws GpsUtilException, UserServiceException {
-		when(userProxy.getUserLatestVisitedLocation(any(UUID.class))).thenReturn(userLastVisitedLocation);
-		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenReturn(userLastVisitedLocation);
-		assertEquals(userLastVisitedLocation,visitedLocationService.getUserLocation(userLastVisitedLocation.getUserId()));
+		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenReturn(userLocation);
+		assertEquals(userLocation,visitedLocationService.getUserLocation(userLocation.getUserId()));
 	}
 
 	@Test
 	void getUserLocationTestWhenLastAndActualAreDifferent() throws GpsUtilException, UserServiceException {
-		userActualLocation = new VisitedLocationBean(userLastVisitedLocation.getUserId(),new LocationBean(48.50,48.50),new Date());
-		when(userProxy.getUserLatestVisitedLocation(userLastVisitedLocation.getUserId())).thenReturn(userLastVisitedLocation);
-		when(gpsUtilProxyImpl.getUserLocation(userLastVisitedLocation.getUserId())).thenReturn(userActualLocation);
-		assertEquals(userActualLocation,visitedLocationService.getUserLocation(userLastVisitedLocation.getUserId()));
+		userActualLocation = new VisitedLocationBean(userLocation.getUserId(),new LocationBean(48.50,48.50),new Date());
+		when(gpsUtilProxyImpl.getUserLocation(userLocation.getUserId())).thenReturn(userActualLocation);
+		assertEquals(userActualLocation,visitedLocationService.getUserLocation(userLocation.getUserId()));
 	}
 	
 	@Test
 	void isExpectedExceptionThrownWhenUserActualLocationIsNull() throws GpsUtilException{
-		when(userProxy.getUserLatestVisitedLocation(any(UUID.class))).thenReturn(userLastVisitedLocation);
 		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenThrow(GpsUtilException.class);
 		assertThrows(GpsUtilException.class,()-> visitedLocationService.getUserLocation(UUID.randomUUID()));
 	}
 	
 	@Test
-	void isExpectedExceptionThrownWhenUserLastLocationFromListIsNull() throws GpsUtilException, UserServiceException {
-		when(userProxy.getUserLatestVisitedLocation(any(UUID.class))).thenReturn(null);
-		assertThrows(UserServiceException.class,()-> visitedLocationService.getUserLocation(UUID.randomUUID()));
+	void isExpectedExceptionThrownWhenUserServiceIsUnreacheableToAddUserLocation() throws GpsUtilException {
+		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenReturn(userLocation);
+		when(userProxy.addUserVisitedLocation(userLocation.getUserId(), userLocation)).thenThrow(FeignException.class);
+		assertThrows(UserServiceException.class,()->visitedLocationService.getUserLocation(userLocation.getUserId()));
 	}
 }

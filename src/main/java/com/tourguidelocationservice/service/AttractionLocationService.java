@@ -33,6 +33,7 @@ public class AttractionLocationService {
 			double distance = distanceCalculationService.getDistance(location, attractionLocation);
 			distancesToAttractionsMap.put(distance, attraction);
 		};
+		System.out.println(distancesToAttractionsMap);
 		return distancesToAttractionsMap;
 	}
 

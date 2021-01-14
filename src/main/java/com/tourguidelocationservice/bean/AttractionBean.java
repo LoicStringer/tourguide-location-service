@@ -73,5 +73,11 @@ public class AttractionBean {
 		this.longitude = longitude;
 	}
 
+	@Override
+	public String toString() {
+		return "AttractionBean [attractionId=" + attractionId + ", attractionName=" + attractionName + ", city=" + city
+				+ ", state=" + state + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+	}
+
     
 }

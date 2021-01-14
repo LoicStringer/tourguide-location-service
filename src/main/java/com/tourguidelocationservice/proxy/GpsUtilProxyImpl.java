@@ -14,6 +14,8 @@ import com.tourguidelocationservice.mapper.AttractionMapper;
 import com.tourguidelocationservice.mapper.VisitedLocationMapper;
 
 import gpsUtil.GpsUtil;
+import gpsUtil.location.Attraction;
+import gpsUtil.location.VisitedLocation;
 
 @Service
 public class GpsUtilProxyImpl implements IGpsUtilProxy {
@@ -29,19 +31,21 @@ public class GpsUtilProxyImpl implements IGpsUtilProxy {
 
 	@Override
 	public VisitedLocationBean getUserLocation(UUID userId) throws GpsUtilException {
-		VisitedLocationBean userLocation = visitedLocationMapper.mapVisitedLocation(gpsUtil.getUserLocation(userId));
-		if(userLocation==null)
+		VisitedLocation gpsUserLocation = gpsUtil.getUserLocation(userId);
+		if(gpsUserLocation==null)
 			throw new GpsUtilException("A problem occured with external library \"GpsUtil\" : can't retrieve the actual user location.");
+		VisitedLocationBean userLocation = visitedLocationMapper.mapVisitedLocation(gpsUserLocation);
 		return userLocation ;
 	}
 
 	@Override
 	public List<AttractionBean> getAttractions() throws GpsUtilException {
-		List<AttractionBean> attractionsList = gpsUtil.getAttractions().stream()
-				.map(at -> attractionMapper.mapAttraction(at)).collect(Collectors.toList());
+		List<Attraction> attractionsList = gpsUtil.getAttractions();
 		if(attractionsList==null||attractionsList.isEmpty())
 			throw new GpsUtilException("A problem occured with external library \"GpsUtil\" : can't retrieve the attractions list.");
-		return attractionsList;
+		List<AttractionBean> attractionBeansList = attractionsList.stream()
+				.map(at -> attractionMapper.mapAttraction(at)).collect(Collectors.toList());
+		return attractionBeansList;
 	}
 
 }

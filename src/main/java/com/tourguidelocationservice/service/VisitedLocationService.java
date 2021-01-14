@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tourguidelocationservice.bean.VisitedLocationBean;
-
 import com.tourguidelocationservice.exception.GpsUtilException;
 import com.tourguidelocationservice.exception.UserServiceException;
 import com.tourguidelocationservice.proxy.GpsUtilProxyImpl;
 import com.tourguidelocationservice.proxy.UserProxy;
+
+import feign.FeignException;
 
 @Service
 public class VisitedLocationService {
@@ -22,17 +23,15 @@ public class VisitedLocationService {
 	private GpsUtilProxyImpl gpsUtilProxyImpl;
 
 	public VisitedLocationBean getUserLocation(UUID userId) throws GpsUtilException, UserServiceException {
-		VisitedLocationBean userLastVisitedLocation = userProxy.getUserLatestVisitedLocation(userId);
-		if (userLastVisitedLocation == null)
-			throw new UserServiceException(
-					"A problem occured with the \"TourGuideUserService\" : can't retrieve the user last visited location from his list");
-		VisitedLocationBean actualVisitedLocation = gpsUtilProxyImpl.getUserLocation(userId);
-		if (userLastVisitedLocation == null
-				| !userLastVisitedLocation.getLocation().equals(actualVisitedLocation.getLocation())) {
-			userProxy.addUserVisitedLocation(userId, actualVisitedLocation);
-			userLastVisitedLocation = actualVisitedLocation;
+		VisitedLocationBean userLocation = gpsUtilProxyImpl.getUserLocation(userId);
+		
+		try {
+			userProxy.addUserVisitedLocation(userId, userLocation);
+		}catch (FeignException fEx) {
+			throw new UserServiceException("User service problem occurred when trying to add the user location", fEx.getCause());
 		}
-		return userLastVisitedLocation;
+		
+		return userLocation;
 	}
 
 }
