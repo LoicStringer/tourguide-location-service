@@ -28,7 +28,7 @@ import com.tourguidelocationservice.proxy.GpsUtilProxyImpl;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class AttractionLocationIT {
+class AttractionLocationServiceTestIT {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -75,6 +75,7 @@ class AttractionLocationIT {
 	@Test
 	void getDistancesToAttractionsGpsUtilExceptionTest() throws Exception {
 		LocationBean location = new LocationBean(20.50, 20.50);
+		
 		when(gpsUtilProxyImpl.getAttractions()).thenThrow(GpsUtilException.class);
 		
 		mockMvc.perform(post("/attractions/distances").contentType(MediaType.APPLICATION_JSON)

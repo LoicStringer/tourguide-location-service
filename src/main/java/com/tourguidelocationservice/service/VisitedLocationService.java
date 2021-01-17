@@ -28,7 +28,7 @@ public class VisitedLocationService {
 		try {
 			userProxy.addUserVisitedLocation(userId, userLocation);
 		}catch (FeignException fEx) {
-			throw new UserServiceException("User service problem occurred when trying to add the user location", fEx.getCause());
+			throw new UserServiceException("User service problem occurred when trying to add the user location", fEx);
 		}
 		
 		return userLocation;

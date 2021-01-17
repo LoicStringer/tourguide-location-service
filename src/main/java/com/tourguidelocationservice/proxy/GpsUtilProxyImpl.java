@@ -44,7 +44,8 @@ public class GpsUtilProxyImpl implements IGpsUtilProxy {
 		if(attractionsList==null||attractionsList.isEmpty())
 			throw new GpsUtilException("A problem occured with external library \"GpsUtil\" : can't retrieve the attractions list.");
 		List<AttractionBean> attractionBeansList = attractionsList.stream()
-				.map(at -> attractionMapper.mapAttraction(at)).collect(Collectors.toList());
+				.map(at -> attractionMapper.mapAttraction(at))
+				.collect(Collectors.toList());
 		return attractionBeansList;
 	}
 

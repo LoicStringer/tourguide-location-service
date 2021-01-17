@@ -37,7 +37,6 @@ class VisitedLocationServiceTest {
 	private VisitedLocationService visitedLocationService;
 	
 	private static VisitedLocationBean userLocation ;
-	private VisitedLocationBean userActualLocation;
 	
 	@BeforeAll
 	static void setUp() {
@@ -45,18 +44,11 @@ class VisitedLocationServiceTest {
 	}
 	
 	@Test
-	void getUserLocationTestWhenLastAndActualAreEqual() throws GpsUtilException, UserServiceException {
+	void getUserLocationTest() throws GpsUtilException, UserServiceException {
 		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenReturn(userLocation);
 		assertEquals(userLocation,visitedLocationService.getUserLocation(userLocation.getUserId()));
 	}
 
-	@Test
-	void getUserLocationTestWhenLastAndActualAreDifferent() throws GpsUtilException, UserServiceException {
-		userActualLocation = new VisitedLocationBean(userLocation.getUserId(),new LocationBean(48.50,48.50),new Date());
-		when(gpsUtilProxyImpl.getUserLocation(userLocation.getUserId())).thenReturn(userActualLocation);
-		assertEquals(userActualLocation,visitedLocationService.getUserLocation(userLocation.getUserId()));
-	}
-	
 	@Test
 	void isExpectedExceptionThrownWhenUserActualLocationIsNull() throws GpsUtilException{
 		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenThrow(GpsUtilException.class);
