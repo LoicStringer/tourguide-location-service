@@ -16,7 +16,4 @@ public class UserServiceException extends Exception {
 		super(message, cause);
 	}
 	
-	
-	
-
 }

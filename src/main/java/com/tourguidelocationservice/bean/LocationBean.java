@@ -56,7 +56,6 @@ public class LocationBean {
 			return false;
 		return true;
 	}
-
 	
 	
 }

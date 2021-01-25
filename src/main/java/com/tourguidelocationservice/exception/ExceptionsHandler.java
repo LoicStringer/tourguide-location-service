@@ -10,9 +10,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import feign.FeignException;
+
 @RestControllerAdvice
 public class ExceptionsHandler extends ResponseEntityExceptionHandler {
 
+	@ExceptionHandler(FeignException.class)
+	public ResponseEntity<ExceptionResponse> handleFeignException(FeignException feignException) {
+		ExceptionResponse exceptionResponse = buildExceptionResponse(feignException);
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, getHttpStatusFromException(feignException));
+	}
+	
 	@ExceptionHandler(GpsUtilException.class)
 	public ResponseEntity<ExceptionResponse> handleGpsUtilException(GpsUtilException gpsUtilException) {
 		ExceptionResponse exceptionResponse = buildExceptionResponse(gpsUtilException);
