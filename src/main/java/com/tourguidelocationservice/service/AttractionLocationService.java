@@ -28,6 +28,7 @@ public class AttractionLocationService {
 		
 		TreeMap<Double, AttractionBean> distancesToAttractionsMap = new TreeMap<Double, AttractionBean>();
 		List<AttractionBean> attractionsList = getAttractionsList();
+		
 		for(AttractionBean attraction:attractionsList) {
 			LocationBean attractionLocation = new LocationBean(attraction.latitude, attraction.longitude);
 			

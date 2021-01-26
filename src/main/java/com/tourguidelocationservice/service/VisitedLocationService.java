@@ -24,6 +24,7 @@ public class VisitedLocationService {
 
 	public VisitedLocationBean getUserLocation(UUID userId) throws GpsUtilException, UserServiceException {
 		VisitedLocationBean userLocation = gpsUtilProxyImpl.getUserLocation(userId);
+		
 		try {
 			userProxy.addUserVisitedLocation(userId, userLocation);
 		}catch (FeignException fEx) {
