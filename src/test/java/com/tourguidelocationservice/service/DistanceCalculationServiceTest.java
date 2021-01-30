@@ -20,7 +20,7 @@ class DistanceCalculationServiceTest {
 	}
 	
 	@Test
-	void checkValidLocationTest() {
+	void checkValidLocationTest()  {
 		LocationBean location = new LocationBean(89.99999,179.9999);
 		LocationBean locationTwo = new LocationBean(-91.00,120.00);
 		LocationBean locationThree = new LocationBean(-89.00,181.00);
@@ -41,4 +41,5 @@ class DistanceCalculationServiceTest {
 		LocationBean loc2 = new LocationBean(48.00,48.00);
 		assertEquals(2438.6099005082897,distanceCalculationService.getDistance(loc1, loc2));
 	}
+	
 }

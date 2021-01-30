@@ -25,6 +25,8 @@ import com.tourguidelocationservice.proxy.GpsUtilProxyImpl;
 @ExtendWith(MockitoExtension.class)
 class AttractionLocationServiceTest {
 
+	
+	
 	@InjectMocks
 	private AttractionLocationService attractionLocationService;
 
@@ -59,18 +61,19 @@ class AttractionLocationServiceTest {
 		assertEquals(2, distancesToAttractions.size());
 		assertEquals("Flatiron Building", distancesToAttractions.get(10.00).getAttractionName());
 		assertEquals("Bronx Zoo", distancesToAttractions.get(20.00).getAttractionName());
+		
 	}
 
 	@Test
-	void isExpectedExceptionThrownWhenLocationIsInvalid() {
+	void isExpectedExceptionThrownWhenLocationIsInvalid() throws InvalidLocationException {
 		LocationBean location = new LocationBean(-92.00,120.00);
-		when(calculator.checkIfLocationIsValid(location)).thenReturn(false);
+		//when(calculator.checkIfLocationIsValid(location)).thenReturn(false);
 		assertThrows(InvalidLocationException.class,
 				() -> attractionLocationService.getDistancesToAttractions(location));
 	}
 
 	@Test
-	void isExpectedExceptionThrownWhenAttractionsListIsNullOrEmpty() throws GpsUtilException {
+	void isExpectedExceptionThrownWhenAttractionsListIsNullOrEmpty() throws GpsUtilException, InvalidLocationException {
 		LocationBean location = new LocationBean(20.50, 20.50);
 		when(calculator.checkIfLocationIsValid(location)).thenReturn(true);
 		when(gpsUtilProxyImpl.getAttractions()).thenThrow(GpsUtilException.class);
