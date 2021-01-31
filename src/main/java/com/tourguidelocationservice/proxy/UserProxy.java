@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.tourguidelocationservice.bean.VisitedLocationBean;
 
 
-@FeignClient(name = "${feign-client.name}", url= "${feign-client.url}")
+@FeignClient(name = "${feign.client.name}", url= "${feign.client.url}")
 public interface UserProxy {
 
 	@PostMapping("/users/{userId}/visited-locations")
