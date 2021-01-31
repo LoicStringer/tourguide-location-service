@@ -35,7 +35,7 @@ public class AttractionLocationService {
 		TreeMap<Double, AttractionBean> distancesToAttractionsMap = new TreeMap<Double, AttractionBean>();
 		log.debug("Getting the attractions list.");
 		List<AttractionBean> attractionsList = getAttractionsList();
-		attractionsList.parallelStream().forEach(at->{
+		attractionsList.stream().forEach(at->{
 			LocationBean attractionLocation = new LocationBean(at.latitude, at.longitude);
 			distanceCalculationService.checkIfLocationIsValid(attractionLocation);
 			double distance = distanceCalculationService.getDistance(location, attractionLocation);

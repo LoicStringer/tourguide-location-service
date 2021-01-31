@@ -1,4 +1,0 @@
-FROM openjdk:16-slim
-ADD build/libs/*.jar tourguide-location-service.jar
-EXPOSE 9004
-ENTRYPOINT ["java", "-jar", "tourguide-location-service.jar"]
