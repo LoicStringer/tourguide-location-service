@@ -27,15 +27,15 @@ public class VisitedLocationService {
 	private GpsUtilProxyImpl gpsUtilProxyImpl;
 
 	public VisitedLocationBean getUserLocation(UUID userId) throws GpsUtilException, UserServiceException {
-		log.debug("Querying user location to external library GpsUtil.");
+		//log.debug("Querying user location to external library GpsUtil.");
 		VisitedLocationBean userLocation = gpsUtilProxyImpl.getUserLocation(userId);
 		
 		try {
-			log.debug("Adding the retrieved user location to the user's visited location list." + System.lineSeparator() 
-			+"Calling tourguide-user-service.");
+			//log.debug("Adding the retrieved user location to the user's visited location list." + System.lineSeparator() 
+			//+"Calling tourguide-user-service.");
 			userProxy.addUserVisitedLocation(userId, userLocation);
 		}catch (FeignException fEx) {
-			log.error("Feign exception was raised. "+ fEx.getMessage());
+			//log.error("Feign exception was raised. "+ fEx.getMessage());
 			throw new UserServiceException("User service problem occurred when trying to add the user location", fEx);
 		}
 		

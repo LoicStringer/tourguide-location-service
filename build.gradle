@@ -24,10 +24,19 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile files('libs/gpsUtil.jar')
 	
 }
+
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'ch.qos.logback'
+    }
+}
+
 
 dependencyManagement {
 	imports {
@@ -35,13 +44,6 @@ dependencyManagement {
 	}
 }
 
-configurations {
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-        exclude group: "ch.qos.logback", module: "logback-classic"
-    }
-}
-	
 jacoco {
     toolVersion = "0.8.5"
     reportsDir = file("build/jacoco")
