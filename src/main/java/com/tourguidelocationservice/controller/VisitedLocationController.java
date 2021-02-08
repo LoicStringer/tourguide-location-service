@@ -23,7 +23,7 @@ public class VisitedLocationController {
 	@Autowired
 	private VisitedLocationService visitedLocationService;
 
-	@GetMapping("/users/{userId}/visited-locations/latest")
+	@GetMapping("/users/{userId}/locations/latest")
 	public ResponseEntity<VisitedLocationBean> getUserLocation(@PathVariable UUID userId) throws GpsUtilException, UserServiceException{
 		log.info("Processing user location.Returns a visited location bean from external library GpsUtil.");
 		return ResponseEntity.ok(visitedLocationService.getUserLocation(userId));

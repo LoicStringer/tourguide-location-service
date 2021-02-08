@@ -52,7 +52,7 @@ class VisitedLocationServiceTestIT {
 		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenReturn(userLocation);
 		when(userProxy.addUserVisitedLocation(any(UUID.class), any(VisitedLocationBean.class))).thenReturn(userLocation);
 		
-		mockMvc.perform(get("/users/"+UUID.randomUUID()+"/visited-locations/latest"))
+		mockMvc.perform(get("/users/"+UUID.randomUUID()+"/locations/latest"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.location.latitude").value(20.50))
 				.andExpect(jsonPath("$.location.longitude").value(120.50));
@@ -62,7 +62,7 @@ class VisitedLocationServiceTestIT {
 	void isExpectedExceptionThrownWhenUserLocationIsNotFound() throws Exception {
 		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenThrow(GpsUtilException.class);
 		
-		mockMvc.perform(get("/users/"+UUID.randomUUID()+"/visited-locations/latest"))
+		mockMvc.perform(get("/users/"+UUID.randomUUID()+"/locations/latest"))
 				.andExpect(status().isNotFound())
 				.andExpect(result->assertTrue(result.getResolvedException() instanceof GpsUtilException));
 	}
@@ -72,7 +72,7 @@ class VisitedLocationServiceTestIT {
 		when(gpsUtilProxyImpl.getUserLocation(any(UUID.class))).thenReturn(userLocation);
 		when(userProxy.addUserVisitedLocation(any(UUID.class), any(VisitedLocationBean.class))).thenThrow(FeignException.class);
 		
-		mockMvc.perform(get("/users/"+UUID.randomUUID()+"/visited-locations/latest"))
+		mockMvc.perform(get("/users/"+UUID.randomUUID()+"/locations/latest"))
 		.andExpect(status().isNotFound())
 		.andExpect(result->assertTrue(result.getResolvedException() instanceof UserServiceException));
 	}
