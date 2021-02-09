@@ -29,7 +29,6 @@ public class VisitedLocationService {
 	public VisitedLocationBean getUserLocation(UUID userId) throws GpsUtilException, UserServiceException {
 		log.debug("Querying user location to external library GpsUtil.");
 		VisitedLocationBean userLocation = gpsUtilProxyImpl.getUserLocation(userId);
-		
 		try {
 			log.debug("Adding the retrieved user location to the user's visited location list." + System.lineSeparator() 
 			+"Calling tourguide-user-service.");

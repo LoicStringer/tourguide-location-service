@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tourguidelocationservice.bean.VisitedLocationBean;
@@ -28,4 +30,6 @@ public class VisitedLocationController {
 		log.info("Processing user location.Returns a visited location bean from external library GpsUtil.");
 		return ResponseEntity.ok(visitedLocationService.getUserLocation(userId));
 	}
+	
+	
 }

@@ -15,6 +15,7 @@ public class VisitedLocationMapper {
 		visitedLocationBean.setUserId(visitedLocation.userId);
 		visitedLocationBean.setLocation(new LocationBean(visitedLocation.location.latitude,visitedLocation.location.longitude));
 		visitedLocationBean.setTimeVisited(visitedLocation.timeVisited);
+		
 		return visitedLocationBean;
 	}
 
